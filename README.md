@@ -14,7 +14,7 @@ https://github.com/satpathysarthak/week7_mimic.git
 
 ### Requirements
 
-```
+
 This can be done either directly in the cloned repository or by setting up an [Anaconda](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html) or Python [virtualenv](https://virtualenv.pypa.io/en/stable/user_guide.html) environment
 
 ### Files and Directories
