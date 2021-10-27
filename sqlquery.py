@@ -1,3 +1,14 @@
+##############################################################
+# Script: sqlquery.py
+# Author: Sarthak Satpathy
+# Running the script: python createdb.py
+# input: mimc db, mentioned in the script
+# output a <filename>.csv file which has the queried dataset with info on Urine test values
+# Purpose: create a databse for the tables obtained from mimic csv files
+# the input paths can be relative to the working directory
+# the output will be created in the working directory
+################################################################
+
 import pandas as pd
 import sqlite3
 
