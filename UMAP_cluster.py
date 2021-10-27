@@ -1,3 +1,14 @@
+ 
+##############################################################
+# Script: UMAP_cluster.py
+# Author: Sarthak Satpathy
+# Running the script: preferred to be run chunk wise on Jupyter
+# input: a <filename>.csv file which has the queried dataset with info on Urine test values
+# output Figures with UMAP and accuracy calculations
+# Purpose: UMAP clustering and accuracy calculations, defining labels for AKI stage based on clustering
+# the input paths can be relative to the working directory
+# the output will be created in the working directory
+################################################################
 # library imports
 import numpy as np
 from sklearn.datasets import load_digits
