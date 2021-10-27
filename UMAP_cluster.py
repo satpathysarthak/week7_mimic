@@ -1,3 +1,4 @@
+# library imports
 import numpy as np
 from sklearn.datasets import load_digits
 from sklearn.model_selection import train_test_split
@@ -8,12 +9,14 @@ import pandas as pd
 %matplotlib inline
 import hdbscan
 
-
+#reading the subset data
 df = pd.read_csv('df.csv')
 
+# Umap import
 import umap.umap_ as umap
 reducer = umap.UMAP()
 
+# data stored as matrix
 df_data = df[
     [
         #'51066',
@@ -31,11 +34,15 @@ scaled_df_data = StandardScaler().fit_transform(df_data)
 embedding = reducer.fit_transform(scaled_df_data)
 #embedding.shape
 
+
+# creating labels
+
+
 #scatterplot 
 plt.scatter(
     embedding[:, 0],
     embedding[:, 1])#,
-    #c=[sns.color_palette()[x] for x in penguins.species_short.map({"Adelie":0, "Chinstrap":1, "Gentoo":2})])
+    
 plt.gca().set_aspect('equal', 'datalim')
 plt.title('UMAP projection of the dataset', fontsize=24)
 
