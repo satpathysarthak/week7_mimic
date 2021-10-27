@@ -23,3 +23,5 @@ This can be done either directly in the cloned repository or by setting up an [A
 `sqlquery.py`: Scripts with Sqlite commands to query a reference and a clustering dataset. 
 
 `UMAP_cluster.py`: Scripts with commands for AKI classification based on conditionals, UMAP clustering and Accuracy claculation.
+`TRUE_labels.png` : Labeling or coloring the datasets based on labels defined for stages 1,2,3 of AKI
+`UMAP_labels.png` : Labeling or coloring the datasets based on labels obtained from UMAP clustering
