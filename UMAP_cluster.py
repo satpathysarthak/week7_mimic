@@ -36,15 +36,29 @@ embedding = reducer.fit_transform(scaled_df_data)
 
 
 # creating labels
+df_new = df[['SUBJECT_ID','51081','51109','51087']]
+df_new['serum'] = df_new['51081']
+df_new['urine'] = df_new['51109']/(df_new['51087']*87)
 
+#baseline for Serum Creatinine
+baseline = df_new['serum'].min()
+#using conditionals on the Serum creatinine and urine level
+df_new['class'] = 0
+lab = np.array(df_new['class'])
+ScR = np.array(df_new['serum'])
+Ur = np.array(df_new['urine'])
+for i in range(0,len(df_new)):
+    if((ScR[i] > 1.5*baseline and ScR[i] < 2.0*baseline) or (Ur[i] > 1.0 or Ur[i] < 2.0)):
+        lab[i] = 1
+    if((ScR[i] > 2.0*baseline and ScR[i] < 2.9*baseline) or (Ur[i] > 0.3 or Ur[i] < 1.0)):
+        lab[i] = 2
+    if((ScR[i] > 3.0*baseline ) or (Ur[i] < 0.3 )):   
+        lab[i] = 3
+df_new['class'] = lab
 
-#scatterplot 
-plt.scatter(
-    embedding[:, 0],
-    embedding[:, 1])#,
-    
-plt.gca().set_aspect('equal', 'datalim')
-plt.title('UMAP projection of the dataset', fontsize=24)
+#scatterplot with clusters labelled by the TRUE labels(set by condionals)
+plt.scatter(clusterable_embedding[:, 0], clusterable_embedding[:, 1],
+            c=lab, s=10, cmap='Spectral');
 
 
 clusterable_embedding = umap.UMAP(
@@ -61,6 +75,7 @@ labels = hdbscan.HDBSCAN(
 ).fit_predict(clusterable_embedding)
 labels
 
+#scatterplot with clusters labelled by the UMAP algorithm
 clustered = (labels >= 0)
 plt.scatter(clusterable_embedding[~clustered, 0],
             clusterable_embedding[~clustered, 1],
@@ -72,4 +87,6 @@ plt.scatter(clusterable_embedding[clustered, 0],
             c=labels[clustered],
             s=10,
             cmap='Spectral');
-
+#calculating score
+from sklearn.metrics import adjusted_rand_score, adjusted_mutual_info_score
+adjusted_rand_score(lab, labels)
